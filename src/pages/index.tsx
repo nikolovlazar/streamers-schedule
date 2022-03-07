@@ -1,49 +1,16 @@
 import { CircularProgress, Flex, Heading } from '@chakra-ui/react';
-import type { Session } from '@supabase/supabase-js';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import Layout from 'layout';
+import { ReactElement } from 'react';
 
-import supabase from '../supabase';
+import { useAuth } from '~providers/auth';
 
 const Home = () => {
-  const [session, setSession] = useState<Session>();
-  const router = useRouter();
-
-  useEffect(() => {
-    const getSession = async () => {
-      const userSession = supabase.auth.session();
-
-      if (!userSession) {
-        const { data: urlSession, error } =
-          await supabase.auth.getSessionFromUrl({
-            storeSession: true,
-          });
-
-        debugger;
-
-        if (!urlSession || error) {
-          router.replace('/login');
-        } else {
-          supabase.auth.setSession(urlSession.refresh_token ?? '');
-          setSession(urlSession);
-        }
-      } else {
-        setSession(userSession);
-      }
-    };
-
-    getSession();
-  }, [router]);
-
-  if (!session) {
-    return (
-      <Flex justify="center" alignItems="center" h="100vh">
-        <CircularProgress isIndeterminate />
-      </Flex>
-    );
-  }
+  const { session } = useAuth();
 
   return <Heading>Welcome, {session?.user?.email}</Heading>;
 };
+
+Home.getLayout = (page: ReactElement) => <Layout>{page}</Layout>;
+Home.isProtected = true;
 
 export default Home;
