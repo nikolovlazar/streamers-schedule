@@ -1,4 +1,4 @@
-import { CircularProgress, Flex, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import Layout from 'layout';
 import { ReactElement } from 'react';
 
