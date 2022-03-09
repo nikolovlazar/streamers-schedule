@@ -19,7 +19,7 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const isProtected = Component.isProtected ?? false;
-  const { state } = useAuthLayer();
+  const { state, session } = useAuthLayer();
 
   const [enhancedPage, setEnhancedPage] = useState<ReactNode>();
 
@@ -36,6 +36,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           );
           break;
         case 'LOGGED_IN':
+          console.log(session);
           setEnhancedPage(getLayout(<Component {...pageProps} />));
           break;
         case 'LOGGED_OUT':

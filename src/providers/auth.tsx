@@ -49,10 +49,14 @@ export const useAuthLayer = () => {
   );
 
   const signInWithTwitch = async () => {
-    const { session } = await supabase.auth.signIn({
-      provider: 'twitch',
-    });
-    setSession(session);
+    await supabase.auth.signIn(
+      {
+        provider: 'twitch',
+      },
+      {
+        redirectTo: 'http://localhost:3000/logging-in',
+      }
+    );
   };
 
   const logout = async () => {
