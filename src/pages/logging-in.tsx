@@ -16,7 +16,6 @@ const LoggingIn = () => {
       session.user &&
       session.user.user_metadata
     ) {
-      // Set cookie
       const {
         provider_token,
         user: {
@@ -31,7 +30,6 @@ const LoggingIn = () => {
         provider_id,
       };
       Cookies.set('auth', JSON.stringify(auth));
-      // Replace to /
       router.replace('/');
     }
   }, [state, session, router]);

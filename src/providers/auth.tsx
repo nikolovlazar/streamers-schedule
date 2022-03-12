@@ -54,7 +54,7 @@ export const useAuthLayer = () => {
         provider: 'twitch',
       },
       {
-        redirectTo: 'http://localhost:3000/logging-in',
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/logging-in`,
       }
     );
   };
@@ -78,10 +78,12 @@ export const useAuthLayer = () => {
 
   useEffect(() => {
     const checkAuthState = async () => {
-      const { data: supabaseSession, error } =
-        await supabase.auth.getSessionFromUrl({
-          storeSession: true,
-        });
+      const {
+        data: supabaseSession,
+        error,
+      } = await supabase.auth.getSessionFromUrl({
+        storeSession: true,
+      });
 
       const localStorageSession = localStorage.getItem('supabase.auth.token');
 
