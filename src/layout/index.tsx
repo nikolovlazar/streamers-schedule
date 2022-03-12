@@ -6,7 +6,7 @@ import Navbar from './navbar';
 type Props = PropsWithChildren<{}>;
 
 const Layout = ({ children }: Props) => (
-  <VStack spacing={0}>
+  <VStack spacing={6}>
     <Navbar />
     {children}
   </VStack>
