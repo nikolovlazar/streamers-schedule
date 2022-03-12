@@ -1,9 +1,10 @@
-import { List, ListItem, VStack } from '@chakra-ui/react';
+import { Box, List, ListItem, VStack } from '@chakra-ui/react';
 import Layout from 'layout';
 import { GetServerSideProps } from 'next';
 import { ReactElement, useState } from 'react';
 
 import DayPicker from '~components/day-picker';
+import Schedule from '~components/schedule';
 import { FollowRelationship } from '~types/api';
 import { AuthCookie } from '~types/auth';
 import { getFollows } from '~utils/twitch-api';
@@ -15,14 +16,12 @@ type Props = {
 const Home = ({ follows }: Props) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   return (
-    <VStack spacing={6} alignItems="flex-start" w="full" px={6}>
-      <DayPicker selectedDate={selectedDate} onChange={setSelectedDate} />
-      <List>
-        {follows.map(({ to_name }) => (
-          <ListItem key={to_name}>{to_name}</ListItem>
-        ))}
-      </List>
-    </VStack>
+    <Box w="full" flex={1}>
+      <VStack spacing={6} alignItems="flex-start" h="full" px={6}>
+        <DayPicker selectedDate={selectedDate} onChange={setSelectedDate} />
+        <Schedule />
+      </VStack>
+    </Box>
   );
 };
 

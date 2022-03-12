@@ -16,7 +16,14 @@ const Navbar = () => {
   const user = useUser();
   const { logout } = useAuth();
   return (
-    <HStack justify="space-between" py={2} bg="gray.700" w="full" px={6}>
+    <HStack
+      justify="space-between"
+      py={2}
+      bg="gray.700"
+      w="full"
+      px={6}
+      flexShrink={0}
+    >
       <Heading size="md">StreamersSchedule</Heading>
       <Menu>
         <MenuButton
