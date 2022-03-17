@@ -18,7 +18,8 @@ const Navbar = () => {
   return (
     <HStack
       justify="space-between"
-      py={2}
+      alignItems="center"
+      h={12}
       bg="gray.700"
       w="full"
       px={6}
